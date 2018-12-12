@@ -9,8 +9,8 @@
  */
 ?>
 <ul class="dokan-listing-filter dokan-left subsubsub">
-    <li<?php echo $status_class == 'all' ? ' class="active"' : ''; ?>>
-        <a href="<?php echo $permalink; ?>"><?php printf( __( 'All (%d)', 'dokan-lite' ), $post_counts->total ); ?></a>
+    <li<?php  echo $status_class == 'all' ? ' class="active"' : ''; ?>>
+        <a href="<?php echo $permalink; ?>"><?php printf( __( 'All (%d)', 'dokan-lite' ), $post_counts->total - $post_counts->{'draft'} ); ?></a>
     </li>
     <?php foreach ( $statuses as $status => $status_label ): ?>
         <?php
@@ -18,8 +18,11 @@
                 continue;
             }
         ?>
-        <li<?php echo $status_class == $status ? ' class="active"' : ''; ?>>
-            <a href="<?php echo add_query_arg( array( 'post_status' => $status ), $permalink ); ?>"><?php echo $status_label. ' (' . $post_counts->{$status} . ')'; ?></a>
-        </li>
+        <?php if($status_label != 'Draft') { ?>
+            <li<?php echo $status_class == $status ? ' class="active"' : ''; ?>>
+                <a href="<?php echo add_query_arg( array( 'post_status' => $status ), $permalink ); ?>"><?php echo $status_label. ' (' . $post_counts->{$status} . ')'; ?></a>
+            </li>
+        <?php } ?>
+        
     <?php endforeach ?>
 </ul> <!-- .post-statuses-filter -->

@@ -1,13 +1,14 @@
-<?php if ( isset( $is_enable_op_discount['product-discount'] ) && $is_enable_op_discount['product-discount'] == 'product-discount' ) : ?>
-    <div class="dokan-discount-options dokan-edit-row dokan-clearfix">
-        <div class="dokan-section-heading" data-togglehandler="dokan_discount_options">
+<?php if ( ! is_int( key( $is_enable_op_discount ) ) && array_key_exists("product-discount", $is_enable_op_discount ) == "product-discount" ) : ?>
+    <!--<div class="dokan-discount-options dokan-edit-row dokan-clearfix">
+         hold for now -->
+        <!-- <div class="dokan-section-heading" data-togglehandler="dokan_discount_options">
             <h2><i class="fa fa-gift"></i> <?php _e( 'Discount Options', 'dokan' ); ?></h2>
             <p><?php _e( 'Set your discount for this product', 'dokan' ) ?></p>
             <a href="#" class="dokan-section-toggle">
                 <i class="fa fa-sort-desc fa-flip-vertical" aria-hidden="true"></i>
             </a>
             <div class="dokan-clearfix"></div>
-        </div>
+        </div> 
 
         <div class="dokan-section-content">
             <label class="dokan-form-label" for="_is_lot_discount">
@@ -30,5 +31,5 @@
                 <div class="dokan-clearfix"></div>
             </div>
         </div>
-    </div>
+    </div>-->
 <?php endif;?>

@@ -39,11 +39,26 @@ if ( ! empty( $_GET['customer_id'] ) ) { // WPCS: input var ok.
 
     <form action="" method="POST" class="dokan-right">
         <div class="dokan-form-group">
+            <?php 
+                $BaseRest_obj   = new BaseRest;
+                //$url            = $BaseRest_obj->codingkart_get_api_url_stating_or_live();
+                $url        = api_url;
+
+                // Create order should not show on live site
+                if ($url != 'https://autods.com/' || $url != 'http://autobooster-stage.autods.com/') {
+                    echo '<a href="#" class="dokan-btn dokan-btn-sm dokan-btn-danger create_order_api" onclick="return false;">Create order<i class="fa"></i></a>';
+                }
+            ?>
+            
+            <img class="add_new_order_api_loader" src="https://www2.sunwing.ca/MyBooking/Content/images/icons/loader-orange.gif" style="display: none; max-width: 20px;">
+
+            <!-- <a class="dokan-btn dokan-btn-default dokan-btn-sm tips" href="#" onclick="return false;" data-toggle="tooltip" data-placement="top" title="" data-original-title="View" id="selected_orders"><i class="fa fa-eye"></i></a> -->
+            <a class="dokan-btn dokan-btn-sm dokan-btn-danger dokan-btn-theme" href="#" onclick="return false;" data-toggle="tooltip" data-placement="top" title="" data-original-title="View" id="selected_orders">PDF Invoice</i></a>
             <?php
                 wp_nonce_field( 'dokan_vendor_order_export_action', 'dokan_vendor_order_export_nonce' );
             ?>
-            <input type="submit" name="dokan_order_export_all"  class="dokan-btn dokan-btn-sm dokan-btn-danger dokan-btn-theme" value="<?php esc_attr_e( 'Export All', 'dokan-lite' ); ?>">
-            <input type="submit" name="dokan_order_export_filtered"  class="dokan-btn dokan-btn-sm dokan-btn-danger dokan-btn-theme" value="<?php esc_attr_e( 'Export Filtered', 'dokan-lite' ); ?>">
+            <!-- <input type="submit" name="dokan_order_export_all"  class="dokan-btn dokan-btn-sm dokan-btn-danger dokan-btn-theme" value="<?php esc_attr_e( 'Export All', 'dokan-lite' ); ?>">
+            <input type="submit" name="dokan_order_export_filtered"  class="dokan-btn dokan-btn-sm dokan-btn-danger dokan-btn-theme" value="<?php esc_attr_e( 'Export Filtered', 'dokan-lite' ); ?>"> -->
             <input type="hidden" name="order_date" value="<?php echo isset( $_GET['order_date'] ) ? sanitize_key( $_GET['order_date'] ) : ''; ?>">
             <input type="hidden" name="order_status" value="<?php echo isset( $_GET['order_status'] ) ? sanitize_key( $_GET['order_status'] ) : 'all'; ?>">
         </div>

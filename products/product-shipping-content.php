@@ -12,18 +12,12 @@
 <?php
 $dokan_shipping_option  = get_option( 'woocommerce_dokan_product_shipping_settings' );
 $dokan_shipping_enabled = ( isset( $dokan_shipping_option['enabled'] ) ) ? $dokan_shipping_option['enabled'] : 'yes';
-$dokan_shipping_enabled = $dokan_shipping_enabled == 'yes' ? true : false;
-$store_shipping_enabled = get_user_meta( get_current_user_id(), '_dps_shipping_enable', true ) == 'yes' ? true : false;
-$wc_shipping_enabled    = get_option( 'woocommerce_calc_shipping' ) == 'yes' ? true : false;
-$wc_tax_enabled         = get_option( 'woocommerce_calc_taxes' ) == 'yes' ? true : false;
 ?>
-<?php if ( $wc_shipping_enabled || $wc_tax_enabled ) : ?>
-<div class="dokan-product-shipping-tax hide_if_grouped dokan-edit-row dokan-clearfix dokan-border-top <?php echo ! $wc_shipping_enabled ? 'woocommerce-no-shipping' : '' ?> <?php echo ! $wc_tax_enabled ? 'woocommerce-no-tax' : '' ?>">
+<?php if ( ( 'yes' == get_option( 'woocommerce_calc_shipping' ) || 'yes' == get_option( 'woocommerce_calc_taxes' ) ) ): ?>
+<div class="dokan-product-shipping-tax hide_if_virtual hide_if_grouped dokan-edit-row dokan-clearfix dokan-border-top <?php echo ( 'no' == get_option('woocommerce_calc_shipping') ) ? 'woocommerce-no-shipping' : '' ?> <?php echo ( 'no' == get_option('woocommerce_calc_taxes') ) ? 'woocommerce-no-tax' : '' ?>">
     <div class="dokan-section-heading" data-togglehandler="dokan_product_shipping_tax">
-        <h2 class="hide_if_virtual"><i class="fa fa-truck" aria-hidden="true"></i> <?php _e( 'Shipping and Tax', 'dokan' ); ?></h2>
-        <h2 class="show_if_virtual"><i class="fa fa-truck" aria-hidden="true"></i> <?php _e( 'Tax', 'dokan' ); ?></h2>
-        <p class="hide_if_virtual"><?php _e( 'Manage shipping and tax for this product', 'dokan' ); ?></p>
-        <p class="show_if_virtual"><?php _e( 'Manage tax for this product', 'dokan' ); ?></p>
+        <h2><i class="fa fa-truck" aria-hidden="true"></i> <?php _e( 'Shipping and Tax', 'dokan' ); ?></h2>
+        <p><?php _e( 'Manage shipping and tax for this product', 'dokan' ); ?></p>
         <a href="#" class="dokan-section-toggle">
             <i class="fa fa-sort-desc fa-flip-vertical" aria-hidden="true"></i>
         </a>
@@ -31,8 +25,11 @@ $wc_tax_enabled         = get_option( 'woocommerce_calc_taxes' ) == 'yes' ? true
     </div>
 
     <div class="dokan-section-content">
-        <?php if ( $wc_shipping_enabled ) : ?>
-            <div class="dokan-clearfix dokan-shipping-container hide_if_virtual">
+        <?php
+            $store_shipping = get_user_meta( get_current_user_id(), '_dps_shipping_enable', true );
+        ?>
+        <?php if( 'yes' == get_option('woocommerce_calc_shipping') ): ?>
+            <div class="dokan-clearfix dokan-shipping-container">
                 <input type="hidden" name="product_shipping_class" value="0">
                 <div class="dokan-form-group">
                     <label class="dokan-checkbox-inline" for="_disable_shipping">
@@ -53,7 +50,8 @@ $wc_tax_enabled         = get_option( 'woocommerce_calc_taxes' ) == 'yes' ? true
                 <?php if ( $post_id ): ?>
                     <?php do_action( 'dokan_product_options_shipping' ); ?>
                 <?php endif; ?>
-                <div class="show_if_needs_shipping dokan-form-group">
+                <!-- hide for now -->
+                <!-- <div class="show_if_needs_shipping dokan-form-group">
                     <label class="control-label" for="product_shipping_class"><?php _e( 'Shipping Class', 'dokan' ); ?></label>
                     <div class="dokan-text-left">
                         <?php
@@ -79,8 +77,8 @@ $wc_tax_enabled         = get_option( 'woocommerce_calc_taxes' ) == 'yes' ? true
                         <?php wp_dropdown_categories( $args ); ?>
                         <p class="help-block"><?php _e( 'Shipping classes are used by certain shipping methods to group similar products.', 'dokan' ); ?></p>
                     </div>
-                </div>
-                <?php if ( $dokan_shipping_enabled && $store_shipping_enabled ) : ?>
+                </div> -->
+                <?php if( $dokan_shipping_enabled == 'yes' && $store_shipping == 'yes' ) : ?>
                     <div class="show_if_needs_shipping dokan-shipping-product-options">
 
                         <div class="dokan-form-group">
@@ -113,8 +111,9 @@ $wc_tax_enabled         = get_option( 'woocommerce_calc_taxes' ) == 'yes' ? true
             </div>
         <?php endif; ?>
 
-        <?php if ( $wc_tax_enabled ) { ?>
-        <div class="dokan-clearfix dokan-tax-container show_if_variable show_if_simple">
+        <?php if ( 'yes' == get_option( 'woocommerce_calc_taxes' ) ) { ?>
+        <!-- hide for now -->
+        <!-- <div class="dokan-clearfix dokan-tax-container show_if_variable show_if_simple">
             <div class="dokan-tax-product-options">
                 <div class="dokan-form-group content-half-part">
                     <label class="dokan-control-label" for="_tax_status"><?php _e( 'Tax Status', 'dokan' ); ?></label>
@@ -137,7 +136,7 @@ $wc_tax_enabled         = get_option( 'woocommerce_calc_taxes' ) == 'yes' ? true
 
                 <div class="dokan-clearfix"></div>
             </div>
-        </div>
+        </div> -->
         <?php } ?>
     </div><!-- .dokan-side-right -->
 </div><!-- .dokan-product-inventory -->

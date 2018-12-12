@@ -11,16 +11,20 @@ $states          = $country_obj->states;
 $user_id         = get_current_user_id();
 $processing_time = dokan_get_shipping_processing_times();
 
-$dps_enable_shipping     = get_user_meta( $user_id, '_dps_shipping_enable', true );
-$dps_shipping_type_price = get_user_meta( $user_id, '_dps_shipping_type_price', true );
-$dps_additional_product  = get_user_meta( $user_id, '_dps_additional_product', true );
-$dps_additional_qty      = get_user_meta( $user_id, '_dps_additional_qty', true );
-$dps_form_location       = get_user_meta( $user_id, '_dps_form_location', true );
-$dps_country_rates       = get_user_meta( $user_id, '_dps_country_rates', true );
-$dps_state_rates         = get_user_meta( $user_id, '_dps_state_rates', true );
-$dps_pt                  = get_user_meta( $user_id, '_dps_pt', true );
-$dps_shipping_policy     = get_user_meta( $user_id, '_dps_ship_policy', true );
-$dps_refund_policy       = get_user_meta( $user_id, '_dps_refund_policy', true );
+$dps_enable_shipping        = get_user_meta( $user_id, '_dps_shipping_enable', true );
+$dps_shipping_type_price    = get_user_meta( $user_id, '_dps_shipping_type_price', true );
+$dps_additional_product     = get_user_meta( $user_id, '_dps_additional_product', true );
+$dps_additional_qty         = get_user_meta( $user_id, '_dps_additional_qty', true );
+$dps_form_location          = get_user_meta( $user_id, '_dps_form_location', true );
+$dps_form_location_city     = get_user_meta( $user_id, '_dps_form_location_city', true );
+$dps_form_location_zipcode       = get_user_meta( $user_id, '_dps_form_location_zipcode', true );
+$dps_country_rates          = get_user_meta( $user_id, '_dps_country_rates', true );
+$dps_state_rates            = get_user_meta( $user_id, '_dps_state_rates', true );
+$dps_pt                     = get_user_meta( $user_id, '_dps_pt', true );
+$dps_shipping_policy        = get_user_meta( $user_id, '_dps_ship_policy', true );
+$dps_refund_policy          = get_user_meta( $user_id, '_dps_refund_policy', true );
+$flat_rate                  = get_user_meta( $user_id, '_dokan_flat_rate', true );
+
 // Testing Extra code for shipping
 ?>
 
@@ -34,7 +38,7 @@ $dps_refund_policy       = get_user_meta( $user_id, '_dps_refund_policy', true )
      */
     do_action( 'dokan_shipping_settings_form_top' ); ?>
 
-    <div class="dokan-form-group">
+    <div class="dokan-form-group" style="display: none;">
         <label class="dokan-w4 dokan-control-label" for="dps_enable_shipping" style="margin-top:6px">
             <?php _e( 'Enable Shipping', 'dokan' ); ?>
             <span class="dokan-tooltips-help tips" title="<?php esc_attr_e( 'Check this if you want to enable shipping for your store', 'dokan' ); ?>">
@@ -46,7 +50,7 @@ $dps_refund_policy       = get_user_meta( $user_id, '_dps_refund_policy', true )
             <div class="checkbox">
                 <label>
                     <input type="hidden" name="dps_enable_shipping" value="no">
-                    <input type="checkbox" name="dps_enable_shipping" value="yes" <?php checked( 'yes', $dps_enable_shipping, true ); ?>> <?php _e( 'Enable shipping functionality', 'dokan' ); ?>
+                    <input type="checkbox" name="dps_enable_shipping" value="yes" checked <?php checked( 'yes', $dps_enable_shipping, true ); ?>> <?php _e( 'Enable shipping functionality', 'dokan' ); ?>
                 </label>
             </div>
         </div>
@@ -151,6 +155,44 @@ $dps_refund_policy       = get_user_meta( $user_id, '_dps_refund_policy', true )
                 </select>
             </div>
         </div>
+
+        <div class="dokan-form-group">
+            <label class="dokan-w4 dokan-control-label" for="">
+                <?php _e( 'Ships from (City) :', 'dokan' ); ?>
+                <span class="dokan-tooltips-help tips" title="" >
+            </label>
+
+            <div class="dokan-w6 dokan-text-left">
+                <!-- <textarea name="dps_refund_policy" id="" class="dokan-form-control"><?php echo $dps_refund_policy; ?></textarea> -->
+                <input type="text" class="dokan-form-control" name="dps_form_location_city" value="<?php echo $dps_form_location_city; ?>">
+            </div>
+        </div>
+
+        <div class="dokan-form-group">
+            <label class="dokan-w4 dokan-control-label" for="">
+                <?php _e( 'Ships from (Zip Code) :', 'dokan' ); ?>
+                <span class="dokan-tooltips-help tips" title="" >
+            </label>
+
+            <div class="dokan-w6 dokan-text-left">
+                <!-- <textarea name="dps_refund_policy" id="" class="dokan-form-control"><?php echo $dps_refund_policy; ?></textarea> -->
+                <input type="number" class="dokan-form-control" name="dps_form_location_zipcode" value="<?php echo $dps_form_location_zipcode; ?>">
+            </div>
+        </div>
+
+        <div class="dokan-form-group">
+            <label class="dokan-w4 dokan-control-label" for="_dps_ship_policy">
+                <?php _e( 'Flat Rate', 'dokan' ); ?>
+                <span class="dokan-tooltips-help tips" title="<?php _e( 'Write your terms, conditions and instructions about shipping', 'dokan' ); ?>">
+                    <i class="fa fa-question-circle"></i>
+                </span>
+            </label>
+
+            <div class="dokan-w6 dokan-text-left">
+                <input type="number" class="dokan-form-control" name="_dokan_flat_rate" value="<?php echo $flat_rate; ?>">
+            </div>
+        </div>
+
 
         <div class="dokan-form-group">
 

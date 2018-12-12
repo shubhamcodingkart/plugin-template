@@ -13,7 +13,6 @@ if ( is_user_logged_in() ) {
     $user  = wp_get_current_user();
     $name  = $user->display_name;
     $email = $user->user_email;
-}
 ?>
 
 <form id="dokan-form-contact-seller" action="" method="post" class="seller-form clearfix">
@@ -35,3 +34,5 @@ if ( is_user_logged_in() ) {
     <input type="hidden" name="action" value="dokan_contact_seller">
     <input type="submit" name="store_message_send" value="<?php esc_attr_e( 'Send Message', 'dokan-lite' ); ?>" class="dokan-right dokan-btn dokan-btn-theme">
 </form>
+
+<?php } ?>

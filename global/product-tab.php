@@ -31,6 +31,10 @@
             <?php printf( '<a href="%s">%s</a>', dokan_get_store_url( $author->ID ), $author->display_name ); ?>
         </span>
     </li>
+    <?php
+        $BaseAccount_obj = new BaseAccount();
+        $BaseAccount_obj->codingkart_check_verified_user($author->ID);
+    ?>
     <?php if ( !empty( $store_info['address'] ) ) { ?>
         <li class="store-address">
             <span><b><?php _e( 'Address:', 'dokan-lite' ); ?></b></span>
@@ -43,6 +47,12 @@
     <li class="clearfix">
         <?php dokan_get_readable_seller_rating( $author->ID ); ?>
     </li>
+
+    <?php 
+        // additional information
+        $additional_information = new ProductCustom();
+        $additional_information->codingkart_additional_vendor_information();
+    ?>
 
     <?php do_action( 'dokan_product_seller_tab_end', $author, $store_info ); ?>
 </ul>

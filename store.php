@@ -13,10 +13,6 @@ $store_info   = $store_user->get_shop_info();
 $map_location = $store_user->get_location();
 
 get_header( 'shop' );
-
-if ( function_exists( 'yoast_breadcrumb' ) ) {
-    yoast_breadcrumb( '<p id="breadcrumbs">', '</p>' );
-}
 ?>
     <?php do_action( 'woocommerce_before_main_content' ); ?>
 
@@ -27,27 +23,27 @@ if ( function_exists( 'yoast_breadcrumb' ) ) {
                 <?php
                 if ( ! dynamic_sidebar( 'sidebar-store' ) ) {
                     $args = array(
-                        'before_widget' => '<aside class="widget %s">',
+                        'before_widget' => '<aside class="widget">',
                         'after_widget'  => '</aside>',
                         'before_title'  => '<h3 class="widget-title">',
                         'after_title'   => '</h3>',
                     );
 
                     if ( class_exists( 'Dokan_Store_Location' ) ) {
-                        the_widget( 'Dokan_Store_Category_Menu', array( 'title' => __( 'Store Category', 'dokan-lite' ) ), $args );
-
+                        //the_widget( 'Dokan_Store_Category_Menu', array( 'title' => __( 'Store Category', 'dokan-lite' ) ), $args );
+                        the_widget( 'Custom_Dokan_Store_Category_Menu', array( 'title' => __( 'Store Category', 'dokan-lite' ) ), $args );
+                        
                         if ( dokan_get_option( 'store_map', 'dokan_general', 'on' ) == 'on'  && !empty( $map_location ) ) {
                             the_widget( 'Dokan_Store_Location', array( 'title' => __( 'Store Location', 'dokan-lite' ) ), $args );
                         }
 
-                        if ( dokan_get_option( 'store_open_close', 'dokan_general', 'on' ) == 'on' ) {
-                            the_widget( 'Dokan_Store_Open_Close', array( 'title' => __( 'Store Time', 'dokan-lite' ) ), $args );
-                        }
-
-                        if ( dokan_get_option( 'contact_seller', 'dokan_general', 'on' ) == 'on' ) {
-                            the_widget( 'Dokan_Store_Contact_Form', array( 'title' => __( 'Contact Vendor', 'dokan-lite' ) ), $args );
+                        if ( is_user_logged_in() ) {
+                            if ( dokan_get_option( 'contact_seller', 'dokan_general', 'on' ) == 'on' ) {
+                                the_widget( 'Dokan_Store_Contact_Form', array( 'title' => __( 'Contact Vendor', 'dokan-lite' ) ), $args );
+                            }
                         }
                     }
+
                 }
                 ?>
 

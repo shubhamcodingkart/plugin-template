@@ -15,6 +15,8 @@ if ( isset( $_GET['order_id'] ) ) {
     <?php
 } else {
 
-    dokan_order_listing_status_filter();
+    $test = new EditOrder;
+
+    $test->codingkart_custom_dokan_order_listing_status_filter();
 
 }

@@ -52,8 +52,8 @@
                                     <input type="number" class="dokan-product-regular-price dokan-form-control" name="_regular_price" placeholder="0.00" min="0" step="any">
                                 </div>
                             </div>
-
-                            <div class="content-half-part sale-price">
+                            
+                            <!-- <div class="content-half-part sale-price">
                                 <label for="_sale_price" class="form-label">
                                     <?php _e( 'Discounted Price', 'dokan-lite' ); ?>
                                     <a href="#" class="sale_schedule"><?php _e( 'Schedule', 'dokan-lite' ); ?></a>
@@ -64,7 +64,7 @@
                                     <span class="dokan-input-group-addon"><?php echo get_woocommerce_currency_symbol(); ?></span>
                                     <input type="number" class="dokan-product-sales-price dokan-form-control" name="_sale_price" placeholder="0.00" min="0" step="any">
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
 
                         <div class="dokan-hide sale-schedule-container sale_price_dates_fields dokan-clearfix dokan-form-group">
@@ -142,7 +142,7 @@
                             'id'               => 'product_tag',
                             'taxonomy'         => 'product_tag',
                             'title_li'         => '',
-                            'class'            => 'product_tags dokan-form-control',
+                            'class'            => 'product_tags dokan-form-control dokan-select2',
                             'exclude'          => '',
                             'selected'         => array(),
                             'echo'             => 0,
@@ -162,7 +162,7 @@
                 <span class="dokan-show-add-product-error"></span>
                 <span class="dokan-spinner dokan-add-new-product-spinner dokan-hide"></span>
                 <input type="submit" id="dokan-create-new-product-btn" class="dokan-btn dokan-btn-default" data-btn_id="create_new" value="<?php _e( 'Create product', 'dokan-lite' ) ?>">
-                <input type="submit" id="dokan-create-and-add-new-product-btn" class="dokan-btn dokan-btn-theme" data-btn_id="create_and_new" value="<?php _e( 'Create & add new', 'dokan-lite' ) ?>">
+                <!-- <input type="submit" id="dokan-create-and-add-new-product-btn" class="dokan-btn dokan-btn-theme" data-btn_id="create_and_new" value="<?php _e( 'Create & add new', 'dokan-lite' ) ?>"> -->
             </div>
         </form>
     </div>
